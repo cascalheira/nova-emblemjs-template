@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syntax name="slim">
+    <meta>
+        <name>Slim</name>
+        <type>markup</type>
+        <preferred-file-extension>slim</preferred-file-extension>
+    </meta>
+    
+    <detectors>
+        <extension priority="1.0">slim</extension>
+        <match-content lines="1" priority="0.7">^!!!</match-content>
+    </detectors>
+    
+    <comments>
+        <single>
+            <expression>-\#</expression>
+        </single>
+    </comments>
+    
+    <brackets>
+        <pair open="{" close="}" />
+        <pair open="[" close="]" />
+        <pair open="(" close=")" />
+    </brackets>
+    
+    <scopes>
+        <!-- Values -->
+        <scope name="slim.value.text" spell-check="true">
+            <expression>\\.*$</expression>
+        </scope>
+        <include syntax="self" collection="strings" />
+        <scope name="slim.value.symbol">
+            <expression>(?&lt;!:):[A-Za-z][A-Za-z0-9_]*</expression>
+        </scope>
+        
+        <!-- Expressions -->
+        <scope name="slim.expression">
+            <starts-with>
+                <expression>^\s*-</expression>
+            </starts-with>
+            <ends-with>
+                <expression>$</expression>
+            </ends-with>
+            <subsyntax name="ruby">
+                <cut-off>
+                    <expression>$</expression>
+                </cut-off>
+            </subsyntax>
+        </scope>
+        <scope name="slim.evaluation">
+            <starts-with>
+                <expression>==?(?!&gt;)</expression>
+            </starts-with>
+            <ends-with>
+                <expression>$</expression>
+            </ends-with>
+            <subsyntax name="ruby">
+                <cut-off>
+                    <expression>$</expression>
+                </cut-off>
+            </subsyntax>
+        </scope>
+        
+        <!-- Tags -->
+        <scope name="slim.element">
+            <expression>^\s*(?:([a-zA-Z]+[a-zA-Z0-9]*)|(?:([a-zA-Z]+[a-zA-Z0-9]*)?(?:(\#[_a-zA-Z-][_a-zA-Z0-9-]*)|(\.[_a-zA-Z-][_a-zA-Z0-9-]*))+))</expression>
+            <capture number="1" name="slim.element.tag" />
+            <capture number="2" name="slim.element.tag" />
+        </scope>
+        <scope name="slim.comment.single.html" spell-check="true">
+            <expression>^\s*/.*$</expression>
+        </scope>
+        
+        <!-- Syntax -->
+        <scope name="slim.declaration">
+            <expression>^!!!.*$</expression>
+        </scope>
+        <scope name="slim.bracket">
+            <expression>[\(\[\{\)\]\}]</expression>
+        </scope>
+        <scope name="slim.operator">
+            <expression>(\==?\&gt;)</expression>
+        </scope>
+        
+        <!-- Comments -->
+        <scope name="slim.comment.single" spell-check="true">
+            <expression>^\s*-\#.*$</expression>
+        </scope>
+    </scopes>
+    
+    <collections>
+        <!-- Strings -->
+        <collection name="strings">
+            <scope name="slim.string.double-quoted">
+                <expression>&quot;(?:[^&quot;\\]|\\.)*(?:&quot;|$)</expression>
+            </scope>
+            <scope name="slim.string.single-quoted">
+                <expression>&apos;(?:[^&apos;\\]|\\.)*(?:&apos;|$)</expression>
+            </scope>
+        </collection>
+    </collections>
+</syntax>

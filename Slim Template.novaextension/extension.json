@@ -1,0 +1,8 @@
+{
+    "identifier": "fearoffish.slim-template",
+    "name": "Slim Template",
+    "organization": "Fear of Fish",
+    "description": "Simple slim template detection",
+    "version": "1.0",
+    "categories": ["languages"]
+}
