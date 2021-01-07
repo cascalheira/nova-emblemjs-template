@@ -1,0 +1,10 @@
+{
+    "identifier": "cascalheira.emblemjs-template",
+    "name": "Emblem.js Template",
+    "organization": "António Cascalheira",
+    "description": "Simple emblem.js template detection",
+    "version": "1.0",
+    "categories": ["languages"],
+    "repository": "https://github.com/cascalheira/nova-emblemjs-template",
+    "bugs": "https://github.com/cascalheira/nova-emblemjs-template/issues"
+}
